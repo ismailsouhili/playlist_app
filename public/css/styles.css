@@ -1,0 +1,184 @@
+body {
+    background-color: rgba(42, 42, 58, 0.8);
+    /* Mit Transparenz */
+    color: white;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #2a2a3a, #1e1e2f);
+    padding: 15px;
+    color: white;
+    box-shadow: 4px 0px 10px rgba(0, 0, 0, 1.5);
+}
+
+.sidebar h3 {
+    color: #f39c12;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.list-group-item {
+    background-color: #4A4A5A;
+    /* Mit Helligkeitsanpassung */
+    border: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.1rem;
+}
+
+.list-group-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.list-group-item:hover {
+    background-color: hsl(39, 100%, 50%) !important;
+    /* Mit Helligkeitsanpassung */
+    color: #f39c12 !important;
+}
+
+.list-group-item.active {
+    background-color: #f39c12;
+    color: #f39c12 !important;
+    font-weight: bold;
+}
+
+.song-card {
+    background-color: #2a2a3a;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-card:hover {
+    transform: scale(1.03);
+    transition: all 0.2s ease-in-out;
+}
+
+.song-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.song-card .btn-action {
+    margin-left: 10px;
+    padding: 8px 10px;
+    font-size: 1rem;
+
+}
+
+.btn-action i {
+    font-size: 1.5rem;
+}
+
+.btn-warning i {
+    color: #4A4A5A;
+
+}
+
+.btn-danger i {
+    color: #4A4A5A;
+}
+
+
+.btn-info i {
+    color: #4A4A5A;
+}
+
+.no-songs {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #bbb;
+    font-weight: bold;
+}
+
+.btn-sm {
+    padding: 8px 10px;
+    font-size: 1.3rem;
+    border-radius: 5%;
+}
+
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    padding: 30%;
+}
+
+.heading-style {
+    background-color: rgba(42, 42, 58, 0.9);
+    /* Hintergrundfarbe */
+    border: 2px solid #4A4A5A;
+    /* Rahmenfarbe */
+    border-radius: 10px;
+    /* Abgerundete Ecken */
+    padding: 15px;
+    /* Innenabstand */
+    color: #f39c12;
+    /* Schriftfarbe */
+    font-weight: bold;
+    /* Fettdruck */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Schatten */
+    text-decoration: none !important;
+}
+
+
+.input-light-purple {
+    background-color: #7A7A8A; /* Hellere Lila-Farbe */
+    color: black; /* Schwarzer Text für besseren Kontrast */
+    border: 1px solid #B095C5; /* Lila Rand */
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.input-light-purple:focus {
+    background-color: #8A8AA0; /* Noch etwas heller beim Fokus */
+    border-color: #C0A0E0; /* Leichter Lila-Effekt */
+    outline: none;
+    box-shadow: 0 0 10px rgba(176, 149, 197, 0.5);
+}
+
+
+.input-light-purple:hover {
+    background-color: hsl(540, 10%, 25%);
+    /* Mit Helligkeitsanpassung */
+    color: #f39c12 !important;
+}
+
+.btn-primary:hover {
+    background-color: hsl(39, 100%, 50%) !important;
+    color: #4A4A5A !important;
+}
+
+.btn-secondary:hover {
+    background-color: hsl(540, 10%, 25%) !important;
+    color: #f39c12 !important;
+}
+
+
+.add-btn:hover {
+    background-color: hsl(39, 100%, 50%) !important;
+    color: #4A4A5A !important;
+    border-color: #4A4A5A;
+}
+
