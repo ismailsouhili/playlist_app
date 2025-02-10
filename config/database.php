@@ -44,7 +44,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DB_URL','mysql://root:<PASSWORD>@8e8zju.stackhero-network.com:6844/root?useSSL=false&requireSSL=false'),
+            'url' => env('DB_URL','mysql://root:<PASSWORD>@8e8zju.stackhero-network.com:6844/root?useSSL=true&requireSSL=true'),
             'host' => env('DB_HOST', '8e8zju.stackhero-network.com'),
             'port' => env('DB_PORT', '6844'),
             'database' => env('root', ''),
