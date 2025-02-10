@@ -63,7 +63,7 @@ return [
                  //PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA', '/etc/ssl/cert.pem'),
                  ]) : [],
             'options'   => array(
-                    PDO::MYSQL_ATTR_SSL_KEY    => '/etc/ssl/BaltimoreCyberTrustRoot.crt.pem'),
+                    PDO::MYSQL_ATTR_SSL_KEY    => env('MYSQL_ATTR_SSL_CA'),
            
         ],
 
