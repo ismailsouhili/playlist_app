@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <h3 class="mb-4 text-center heading-style">Playlist bearbeiten</h3>
 
-        <form action="{{ route('playlists.update', $Playlist) }}" method="POST" class="text-center">
+        <form action="{{ route('playlists.update', $playlist?->id ?? 0) }}" method="POST" class="text-center">
             @csrf
             @method('PUT')
 
