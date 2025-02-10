@@ -35,8 +35,8 @@ Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
 
 
 // Bearbeitung Playlists
-Route::resource('playlists', PlaylistController::class);
-//Route::get('/playlists/{playlist}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
+//Route::resource('playlists', PlaylistController::class);
+Route::get('/playlists/{playlist}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
 Route::put('/playlists/{playlist}', [PlaylistController::class, 'update'])->name('playlists.update');
 Route::delete('/playlists/{playlist}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
 // Route zum Anzeigen des Formulars für das Erstellen eines Songs (create)
