@@ -19,11 +19,17 @@ class SongController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
+            'minutes' => 'required|integer|min:0|max:20', // Minuten (0-20)
+            'seconds' => 'required|integer|min:0|max:59', // Sekunden (0-59)
         ]);
+
+        $duration = str_pad($request->minutes, 2, '0', STR_PAD_LEFT) . ':' . str_pad($request->seconds, 2, '0', STR_PAD_LEFT);
+
 
         $song->update([
             'title' => $request->title,
             'artist' => $request->artist,
+            'duration' => $duration,
         ]);
 
         return redirect()->route('playlists.index', $song->playlist_id)->with('success', 'Song aktualisiert!');
@@ -37,28 +43,6 @@ class SongController extends Controller
         return redirect()->route('playlists.index', $playlist_id)->with('success', 'Song gelöscht!');
     }
 
-    /*public function create(Request $request)
-    {
-        $playlist_id = $request->query('playlist_id'); // Playlist-ID aus der URL holen
-        return view('songs.create', compact('playlist_id')); // Playlist-ID an die View übergeben
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'artist' => 'required|string|max:255',
-            'playlist_id' => 'required|exists:playlists,id', // Validierung der Playlist-ID
-        ]);
-
-        Song::create([
-            'title' => $request->title,
-            'artist' => $request->artist,
-            'playlist_id' => $request->playlist_id, // Zuordnung zur Playlist
-        ]);
-
-        return redirect()->route('playlists.index', $request->playlist_id)->with('success', 'Song hinzugefügt!');
-    }*/
 
     public function create($playlistId)
     {
@@ -72,11 +56,21 @@ class SongController extends Controller
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
             'playlist_id' => 'required|exists:playlists,id',
+            'minutes' => 'required|integer|min:0|max:20', // Minuten (0-20)
+            'seconds' => 'required|integer|min:0|max:59', // Sekunden (0-59)
         ]);
 
-        Song::create($request->all());
+        // Minuten und Sekunden zu einem String im Format "mm:ss" umwandeln
+        $duration = str_pad($request->minutes, 2, '0', STR_PAD_LEFT) . ':' . str_pad($request->seconds, 2, '0', STR_PAD_LEFT);
+
+        Song::create([
+            'title' => $request->title,
+            'artist' => $request->artist,
+            'playlist_id' => $request->playlist_id,
+            'duration' => $duration, // Speichern als String "mm:ss"
+        ]);
 
         return redirect()->route('playlists.index', $request->playlist_id)
-                         ->with('success', 'Song erfolgreich hinzugefügt.');
+            ->with('success', 'Song erfolgreich hinzugefügt.');
     }
 }

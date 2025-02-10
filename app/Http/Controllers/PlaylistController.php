@@ -15,19 +15,16 @@ class PlaylistController extends Controller
     //
     public function index($playlist_id = null)
     {
-        $playlists = Playlist::all(); // Alle Playlists holen
+        $playlists = Playlist::all(); 
 
-        // Falls keine Playlist ausgewählt ist, nehme die erste aus der Liste
         if (!$playlist_id && count($playlists) > 0) {
             $playlist_id = $playlists->first()->id;
         }
 
-        // Songs der ausgewählten Playlist holen
         $songs = $playlist_id ? Song::where('playlist_id', $playlist_id)->get() : [];
 
         return view('playlists', compact('playlists', 'songs', 'playlist_id'));
     }
-
 
     public function edit(Playlist $Playlist)
     {
@@ -56,13 +53,14 @@ class PlaylistController extends Controller
 
     public function create()
     {
-        return view('playlists.create');
+        return view('playlists.create', compact('playlist'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'type' => 'string|max:255',
         ]);
 
         // Erstelle die neue Playlist

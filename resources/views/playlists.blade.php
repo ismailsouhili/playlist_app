@@ -9,6 +9,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </head>
 
@@ -35,24 +37,26 @@
                             <!-- Buttons rechts -->
                             <div class="d-flex">
                                 <!-- Bearbeiten -->
-                                <a href="{{ route('playlists.edit', $playlist) }}"
-                                    class="btn btn-warning btn-sm btn-action mx-1">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                <form action="{{ route('playlists.edit', $playlist) }}" style="display:inline;">
+                                    <button type="submit" class="btn btn-outline-warning btn-sm btn-action mx-1">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </form>
 
                                 <!-- Löschen -->
                                 <form action="{{ route('playlists.destroy', $playlist->id) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm mx-1"
+                                    <button type="submit" class="btn btn-outline-danger btn-sm mx-1"
                                         onclick="return confirm('Willst du diese Playlist wirklich löschen?');">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
 
                                 <!-- Teilen -->
-                                <button onclick="shareSong('{{ $playlist->name }}')" class="btn btn-info btn-sm mx-1">
+                                <button onclick="shareSong('{{ $playlist->name }}')"
+                                    class="btn btn-outline-light btn-sm mx-1">
                                     <i class="fas fa-share-alt"></i>
                                 </button>
                             </div>
@@ -61,10 +65,59 @@
                     @endforeach
 
                     <li class="list-group-item text-center" style="background-color: #4A4A5A !important;">
-                        <a href="{{ route('playlists.create') }}" class="btn btn-success mb-2 heading-style add-btn">
+                        <a href="" class="btn btn-success mb-2 heading-style add-btn" data-bs-toggle="modal"
+                            data-bs-target="#playlistModal">
                             <span><i class="fa fa-play-circle" aria-hidden="true"></i> Neue Playlist</span>
                         </a>
                     </li>
+
+                    <!--  START Bootstrap Modal (Popup) für das Formular -->
+                    <div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="background-color: #4A4A5A; color: white;">
+                                <!-- Hintergrundfarbe & weiße Schrift -->
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title" id="playlistModalLabel">🎵 Neue Playlist erstellen</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                        aria-label="Schließen"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container d-flex justify-content-center align-items-center">
+                                        <div class="col-md-10">
+                                            <form action="{{ route('playlists.store') }}" method="POST"
+                                                class="text-center">
+                                                @csrf
+
+                                                <!-- Playlist-Name -->
+                                                <div class="mb-4">
+                                                    <label for="name" class="form-label">🎶 Name der
+                                                        Playlist</label>
+                                                    <input type="text" name="name" id="name"
+                                                        class="form-control input-light-purple" required>
+                                                </div>
+
+                                                <!-- Playlist-Typ -->
+                                                <div class="mb-4">
+                                                    <label for="type" class="form-label">📁 Typ der Playlist</label>
+                                                    <input type="text" name="type" id="type"
+                                                        class="form-control input-light-purple" required>
+                                                </div>
+
+                                                <div class="modal-footer border-0 d-flex justify-content-between">
+                                                    <button type="button" class="btn btn-light heading-style"
+                                                        data-bs-dismiss="modal">Abbrechen</button>
+                                                    <button type="submit"
+                                                        class="btn btn-primary heading-style">Speichern</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  END Bootstrap Modal (Popup) für das Formular -->
 
                 </ul>
             </div>
@@ -72,23 +125,23 @@
 
             <!-- Songs der ausgewählten Playlist -->
             <div class="col-md-8">
-                <h3 class="mb-4 text-center heading-style">{{ $playlist->name }} - Songs</h3>
+                <h3 class="mb-4 text-center heading-style">Songs</h3>
 
                 @if ($songs->isEmpty())
                     <p class="no-songs">Diese Playlist hat noch keine Songs.</p>
                 @else
                     @foreach ($songs as $song)
                         <div class="song-card">
-                            <span class="song-title">🎶 {{ $song->title }} - {{ $song->artist }}</span>
+                            <span class="song-title">🎶 {{ $song->title }} - {{ $song->artist }} </span>
                             <div class="d-flex align-items-center">
+                                <span class="song-title">{{ $song->duration }} - </span>
                                 <!-- Zurück -->
                                 <button class="btn btn-secondary btn-circle btn-action" onclick="prevSong()">
                                     <i class="fas fa-backward"></i>
                                 </button>
 
                                 <!-- Play/Pause -->
-                                <button class="btn btn-info btn-circle btn-action play-pause-btn"
-                                    data-song-url="{{ $song->audio_url }}">
+                                <button class="btn btn-info btn-circle btn-action play-pause-btn" data-song-url="">
                                     <i class="fas fa-play"></i>
                                 </button>
 
@@ -96,10 +149,11 @@
                                 <button class="btn btn-secondary btn-circle btn-action" onclick="nextSong()">
                                     <i class="fas fa-forward"></i>
                                 </button>
+                                &nbsp;&nbsp;
 
                                 <!-- Bearbeiten -->
                                 <a href="{{ route('songs.edit', $song) }}"
-                                    class="btn btn-warning btn-sm btn-action mx-1">
+                                    class="btn btn-outline-warning btn-sm btn-action mx-1">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
@@ -108,14 +162,14 @@
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm btn-action mx-1">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-action mx-1">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
 
                                 <!-- Teilen -->
                                 <button onclick="shareSong('{{ $song->title }}')"
-                                    class="btn btn-info btn-sm btn-action mx-1">
+                                    class="btn btn-outline-light btn-sm btn-action mx-1">
                                     <i class="fas fa-share-alt"></i>
                                 </button>
                             </div>
@@ -127,7 +181,7 @@
                 <div class="text-center">
                     <a href="{{ route('songs.create', $playlist->id) }}"
                         class="btn btn-success mb-4 text-center heading-style add-btn">
-                        <i class="fas fa-plus"></i> Neuen Song hinzufügen
+                        🎶 Neuen Song hinzufügen
                     </a>
                 </div>
 
