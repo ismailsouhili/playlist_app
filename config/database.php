@@ -47,7 +47,7 @@ return [
             'url' => env('DB_URL','mysql://root:<PASSWORD>@8e8zju.stackhero-network.com:6844/root?useSSL=true&requireSSL=true'),
             'host' => env('DB_HOST', '8e8zju.stackhero-network.com'),
             'port' => env('DB_PORT', '6844'),
-            'database' => env('DB_DATABASE', 'root'),
+            'database' => env('DB_DATABASE', 'playlist'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', 'OfrIyc8COCug7J1qDHeiwXCHU48CzBL3'),
             'unix_socket' => env('DB_SOCKET', ''),
