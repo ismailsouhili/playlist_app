@@ -11,7 +11,7 @@
 
             <div class="mb-4">
                 <label for="title" class="form-label">Playlist Name</label>
-                <input type="text" name="name" id="name" value="{{ $Playlist->name }}" class="form-control input-light-purple">
+                <input type="text" name="name" id="name" value="{{ $playlist->id }}" class="form-control input-light-purple">
             </div>
 
             <button type="submit" class="btn btn-primary mb-4 text-center heading-style">Speichern</button>
