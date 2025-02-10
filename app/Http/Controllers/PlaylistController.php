@@ -28,6 +28,7 @@ class PlaylistController extends Controller
 
     public function edit(Playlist $Playlist)
     {
+        $playlist = Playlist::findOrFail($id);
         return view('Playlists.edit', compact('Playlist'));
     }
 
