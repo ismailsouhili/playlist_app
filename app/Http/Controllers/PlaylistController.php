@@ -50,7 +50,7 @@ class PlaylistController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('playlists.index', $Playlist->playlist_id)->with('success', 'Song aktualisiert!');
+        return redirect()->route('playlists.index', $Playlist->playlist_id)->with('success', 'Playlist aktualisiert!');
     }
 
     public function destroy(Playlist $playlist)
