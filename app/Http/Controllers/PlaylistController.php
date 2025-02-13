@@ -29,10 +29,16 @@ class PlaylistController extends Controller
         return view('playlists', compact('playlists', 'songs', 'playlist_id'));
     }
 
-    public function edit(Playlist $Playlist)
-    {
-        return view('Playlists.edit', compact('Playlist'));
+    public function edit($id)
+{
+    $playlist = Playlist::find($id);
+
+    if (!$playlist) {
+        abort(404, "Playlist nicht gefunden!");
     }
+
+    return view('playlists.edit', compact('playlist'));
+}
 
     public function update(Request $request, Playlist $Playlist)
     {
