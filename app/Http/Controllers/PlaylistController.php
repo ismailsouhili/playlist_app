@@ -123,7 +123,9 @@ class PlaylistController extends Controller
     ]);
 
     $file = $request->file('csv_file');
-    $path = $file->getPathname(); // Heroku: Direkt auf temporären Pfad zugreifen
+$path = '/tmp/' . $file->getClientOriginalName(); // Speichert die Datei sicher in /tmp/
+$file->move('/tmp/', $file->getClientOriginalName());
+
 
     if (!file_exists($path)) {
         return redirect()->back()->with('error', 'Fehler: Datei nicht gefunden.');
