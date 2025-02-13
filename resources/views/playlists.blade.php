@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 
 </head>
 
 <body>
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-4">
         <div class="row">
             <!-- Sidebar mit Playlists -->
             <div class="col-md-4 sidebar">
@@ -126,6 +129,10 @@
             <div class="col-md-8">
                 <h3 class="mb-4 text-center heading-style">Songs</h3>
 
+                <div>
+                    <input type="text" id="songSearch" class="form-control input-light-purple heading-style mb-4" placeholder="🔍 Song oder Autor suchen ...">
+                </div>
+
                 @if ($songs->isEmpty())
                     <p class="no-songs">Diese Playlist hat noch keine Songs.</p>
                 @else
@@ -183,12 +190,34 @@
                         🎶 Neuen Song hinzufügen
                     </a>
                 </div>
+                
 
             </div>
 
         </div>
     </div>
 
+    <div class="card shadow-lg p-2 text-center heading-style">
+        
+        <!-- CSV-Download-Button -->
+        <a href="{{ route('exportCSV') }}" class="btn btn-success mb-3 text-center heading-style add-btn input-light-purple">
+            <i class="fa fa-download"></i> Playlists & Songs als CSV herunterladen
+        </a>
+    
+        <hr class="my-3">
+    
+        <!-- CSV-Upload-Formular -->
+        <form action="{{ route('playlists.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="d-flex justify-content-center align-items-center gap-2">
+                <input type="file" name="csv_file" class="form-control d-inline w-auto text-center input-light-purple">
+                <button type="submit" class="btn btn-success text-center input-light-purple add-btn">
+                    <i class="fa fa-upload"></i> Playlists & Songs als CSV hochladen
+                </button>
+            </div>
+        </form>
+    </div>
+    
 
 
 </body>
@@ -252,6 +281,20 @@
             playSong(currentSongIndex, document.querySelectorAll('.play-pause-btn')[currentSongIndex]);
         }
     }
+
+    document.getElementById("songSearch").addEventListener("input", function() {
+        let filter = this.value.toLowerCase();
+        let songs = document.querySelectorAll(".song-card"); // Alle Songs abrufen
+
+        songs.forEach(song => {
+            let title = song.querySelector(".song-title").textContent.toLowerCase();
+            if (title.includes(filter)) {
+                song.style.display = "block"; // Song anzeigen
+            } else {
+                song.style.display = "none"; // Song ausblenden
+            }
+        });
+    });
 </script>
 
 </html>
