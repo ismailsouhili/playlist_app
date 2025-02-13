@@ -46,7 +46,10 @@ Route::post('/playlists', [PlaylistController::class, 'store'])->name('playlists
 
 // Route für Import und Export
 Route::get('export-csv', [PlaylistController::class, 'exportCSV'])->name('exportCSV');
-Route::post('/playlists/import', action: [PlaylistController::class, 'importCSV'])->name('playlists.import');
+//Route::post('/playlists/import', action: [PlaylistController::class, 'importCSV'])->name('playlists.import');
+
+Route::post('/playlists/import', [PlaylistController::class, 'importCSV'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])->name('playlists.import');
+
 
 
 
