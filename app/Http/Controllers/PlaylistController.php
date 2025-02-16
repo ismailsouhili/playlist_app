@@ -65,20 +65,6 @@ class PlaylistController extends Controller
         return view('playlists.create', compact('playlist'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'string|max:255',
-        ]);
-
-        // Erstelle die neue Playlist
-        Playlist::create($request->all());
-
-        return redirect()->route('playlists.index')
-            ->with('success', 'Playlist erfolgreich erstellt.');
-    }
-
     public function exportCSV()
     {
         $fileName = 'playlists_songs.csv';
@@ -117,56 +103,68 @@ class PlaylistController extends Controller
 
     // CSV IMPORT (Hochladen)
     public function importCSV(Request $request)
-    {
-        $request->validate([
-            'csv_file' => 'required|mimes:csv,txt|max:2048',
-        ]);
+{
+    $request->validate([
+        'csv_file' => 'required|mimes:csv,txt|max:2048',
+    ]);
 
-        $file = $request->file('csv_file');
-        $path = $file->getRealPath();
+    $file = $request->file('csv_file');
+    $path = $file->getRealPath();
 
-        $fileHandle = fopen($path, 'r');
-        fgetcsv($fileHandle); // Erste Zeile (Header) überspringen
+    $fileHandle = fopen($path, 'r');
+    fgetcsv($fileHandle); // Erste Zeile (Header) überspringen
 
-        while (($data = fgetcsv($fileHandle, 1000, ',')) !== false) {
-            if (count($data) < 5) {
-                continue; // Falls Zeile nicht vollständig ist, überspringen
-            }
+    $newPlaylists = 0;
+    $newSongs = 0;
 
-            list($playlistId, $playlistName, $songTitle, $artist, $duration) = $data;
-
-            if (!$playlistName || !$songTitle || !$artist) {
-                continue; // Ungültige Zeilen überspringen
-            }
-
-            // ✅ Prüfen, ob Playlist existiert
-            $playlist = Playlist::where('id', $playlistId)->first();
-            if (!$playlist) {
-                $playlist = Playlist::firstOrCreate(['name' => $playlistName]);
-            }
-
-            // ✅ Song nur hinzufügen, wenn er nicht bereits in der Playlist ist
-            $songExists = Song::where('playlist_id', $playlist->id)
-                ->where('title', $songTitle)
-                ->where('artist', $artist)
-                ->exists();
-
-            if (!$songExists) {
-                Song::create([
-                    'playlist_id' => $playlist->id,
-                    'title' => $songTitle,
-                    'artist' => $artist,
-                    'duration' => $duration,
-                ]);
-
-                // ✅ Song-Anzahl in Playlist aktualisieren
-                $playlist->increment('song_count');
-            }
+    while (($data = fgetcsv($fileHandle, 1000, ',')) !== false) {
+        if (count($data) < 5) {
+            continue; // Falls Zeile nicht vollständig ist, überspringen
         }
 
-        fclose($fileHandle);
-        return redirect()->back()->with('success', 'CSV-Datei erfolgreich importiert.');
+        list($playlistId, $playlistName, $songTitle, $artist, $duration) = $data;
+
+        if (!$playlistName || !$songTitle || !$artist) {
+            continue; // Ungültige Zeilen überspringen
+        }
+
+        // ✅ Prüfen, ob Playlist existiert
+        $playlist = Playlist::where('id', $playlistId)->first();
+        if (!$playlist) {
+            $playlist = Playlist::firstOrCreate(['name' => $playlistName]);
+            $newPlaylists++; // Neue Playlist wurde erstellt
+        }
+
+        // ✅ Song nur hinzufügen, wenn er nicht bereits in der Playlist existiert
+        $songExists = Song::where('playlist_id', $playlist->id)
+            ->where('title', $songTitle)
+            ->where('artist', $artist)
+            ->exists();
+
+        if (!$songExists) {
+            Song::create([
+                'playlist_id' => $playlist->id,
+                'title' => $songTitle,
+                'artist' => $artist,
+                'duration' => $duration,
+            ]);
+
+            $newSongs++; // Neuer Song wurde hinzugefügt
+
+            // ✅ Song-Anzahl in Playlist aktualisieren
+            $playlist->increment('song_count');
+        }
     }
+
+    fclose($fileHandle);
+
+    // ✅ Erfolgsnachricht mit Anzahl der neuen Playlists und Songs
+    if ($newPlaylists > 0 || $newSongs > 0) {
+        return redirect()->back()->with('success', "$newPlaylists neue Playlists und $newSongs neue Songs wurden importiert.");
+    } else {
+        return redirect()->back()->with('info', 'Keine neuen Daten wurden importiert. Alle Playlists und Songs existieren bereits.');
+    }
+}
 
 
 }
