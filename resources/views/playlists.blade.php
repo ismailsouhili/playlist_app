@@ -132,7 +132,7 @@
                     <!--  END Bootstrap Modal (Popup) für das Formular -->
 
                 </ul>
-            </div>
+            </div> <br><br>
 
 
             <!-- Songs der ausgewählten Playlist -->
