@@ -182,3 +182,52 @@ body {
     border-color: #4A4A5A;
 }
 
+
+// Für Mobile-repo
+
+@media (max-width: 768px) {
+    .song-card {
+        display: flex;
+        flex-direction: column; /* Inhalte untereinander anordnen */
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+    }
+    
+
+    .song-card .song-title {
+        font-size: 1rem;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .song-card .d-flex {
+        flex-direction: row; /* Buttons nebeneinander */
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .btn-action {
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+
+    .btn-circle {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+    }
+
+    .csv-upload-container {
+        flex-direction: column;
+        gap: 10px; /* Abstand zwischen Input & Button */
+    }
+
+    .csv-upload-container input {
+        width: 100%; /* Volle Breite für bessere Usability */
+    }
+
+    .csv-upload-container button {
+        width: 100%; /* Button ebenfalls volle Breite */
+    }
