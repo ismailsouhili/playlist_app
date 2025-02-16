@@ -153,7 +153,7 @@
                         <div class="song-card">
                             <span class="song-title">🎶 {{ $song->title }} - {{ $song->artist }} </span>
                             <div class="d-flex align-items-center">
-                                <span class="song-duration">{{ $song->duration }} - </span>
+                                <span class="song-duration song-title">{{ $song->duration }} - </span>
                                 <!-- Zurück -->
                                 <button class="btn btn-secondary btn-circle btn-action" onclick="prevSong()">
                                     <i class="fas fa-backward"></i>
