@@ -65,6 +65,20 @@ class PlaylistController extends Controller
         return view('playlists.create', compact('playlist'));
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'string|max:255',
+        ]);
+
+        // Erstelle die neue Playlist
+        Playlist::create($request->all());
+
+        return redirect()->route('playlists.index')
+            ->with('success', 'Playlist erfolgreich erstellt.');
+    }
+
     public function exportCSV()
     {
         $fileName = 'playlists_songs.csv';
