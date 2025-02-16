@@ -160,7 +160,7 @@ class PlaylistController extends Controller
 
     // ✅ Erfolgsnachricht mit Anzahl der neuen Playlists und Songs
     if ($newPlaylists > 0 || $newSongs > 0) {
-        return redirect()->back()->with('success', "$newPlaylists neue Playlists und $newSongs neue Songs wurden importiert.");
+        return redirect()->back()->with('success', "CSV-Datei erfolgreich importiert.");
     } else {
         return redirect()->back()->with('info', 'Keine neuen Daten wurden importiert. Alle Playlists und Songs existieren bereits.');
     }
