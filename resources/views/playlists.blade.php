@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playlist App</title>
-    <!-- FontAwesome über ein CDN laden -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -90,7 +89,6 @@
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style="background-color: #4A4A5A; color: white;">
-                                <!-- Hintergrundfarbe & weiße Schrift -->
                                 <div class="modal-header border-0">
                                     <h5 class="modal-title" id="playlistModalLabel">🎵 Neue Playlist erstellen</h5>
                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
@@ -195,7 +193,7 @@
                     @endforeach
                 @endif
 
-                <!-- + Neuen Song hinzufügen Button -->
+                <!--  Neuen Song hinzufügen btn -->
                 <div class="text-center">
                     <a href="{{ route('songs.create', $playlist->id) }}"
                         class="btn btn-success mb-4 text-center heading-style add-btn">
@@ -250,7 +248,7 @@
 
     let currentAudio = null;
     let currentSongIndex = -1;
-    const songs = @json($songs); // Die Songs als Array bereitstellen
+    const songs = @json($songs); 
 
     document.querySelectorAll('.play-pause-btn').forEach((button, index) => {
         button.addEventListener('click', function() {
@@ -296,14 +294,14 @@
 
     document.getElementById("songSearch").addEventListener("input", function() {
         let filter = this.value.toLowerCase();
-        let songs = document.querySelectorAll(".song-card"); // Alle Songs abrufen
+        let songs = document.querySelectorAll(".song-card"); 
 
         songs.forEach(song => {
             let title = song.querySelector(".song-title").textContent.toLowerCase();
             if (title.includes(filter)) {
-                song.style.display = "block"; // Song anzeigen
+                song.style.display = "block"; 
             } else {
-                song.style.display = "none"; // Song ausblenden
+                song.style.display = "none"; 
             }
         });
     });
