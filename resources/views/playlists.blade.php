@@ -198,10 +198,10 @@
 
                 <!-- + Neuen Song hinzufügen Button -->
                 <div class="text-center">
-                    <a href="{{ route('songs.create', $playlist->id) }}"
+                    <a href="{{ route('songs.create', ['playlist' => $playlist_id]) }}"
                         class="btn btn-success mb-4 text-center heading-style add-btn">
                         🎶 Neuen Song hinzufügen
-                    </a>
+                    </a>                    
                 </div>
 
 
