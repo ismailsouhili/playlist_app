@@ -19,8 +19,8 @@ class SongController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
-            'minutes' => 'required|integer|min:0|max:20', 
-            'seconds' => 'required|integer|min:0|max:59', 
+            'minutes' => 'required|integer|min:0|max:20', // Minuten (0-20)
+            'seconds' => 'required|integer|min:0|max:59', // Sekunden (0-59)
         ]);
 
         $duration = str_pad($request->minutes, 2, '0', STR_PAD_LEFT) . ':' . str_pad($request->seconds, 2, '0', STR_PAD_LEFT);
@@ -56,17 +56,19 @@ class SongController extends Controller
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
             'playlist_id' => 'required|exists:playlists,id',
-            'minutes' => 'required|integer|min:0|max:20', 
-            'seconds' => 'required|integer|min:0|max:59', 
+            'minutes' => 'required|integer|min:0|max:20', // Minuten (0-20)
+            'seconds' => 'required|integer|min:0|max:59', // Sekunden (0-59)
         ]);
 
+        // Minuten und Sekunden zu einem String im Format "mm:ss" umwandeln
         $duration = str_pad($request->minutes, 2, '0', STR_PAD_LEFT) . ':' . str_pad($request->seconds, 2, '0', STR_PAD_LEFT);
 
         Song::create([
             'title' => $request->title,
             'artist' => $request->artist,
-            'playlist_id' => $request->playlist_id,
-            'duration' => $duration, 
+            //'playlist_id' => $request->playlist_id,
+            'playlist_id' =>  $request->playlist_id,
+            'duration' => $duration, // Speichern als String "mm:ss"
         ]);
 
         return redirect()->route('playlists.index', $request->playlist_id)

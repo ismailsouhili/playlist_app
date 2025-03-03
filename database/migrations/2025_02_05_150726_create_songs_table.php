@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('artist');
             $table->foreignId('playlist_id')->constrained()->onDelete('cascade');
+            $table->string('duration')->nullable(); // Dauer als String im Format HH:MM:SS
             $table->timestamps();
         });
     }

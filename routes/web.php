@@ -30,25 +30,42 @@ Route::get('/songs/{song}/edit', [SongController::class, 'edit'])->name('songs.e
 Route::put('/songs/{song}', [SongController::class, 'update'])->name('songs.update');
 Route::delete('/songs/{song}', [SongController::class, 'destroy'])->name('songs.destroy');
 // Route zum Anzeigen des Formulars für das Erstellen eines Songs (create)
+//Route::get('/songs/create/{playlist}', [SongController::class, 'create'])->name('songs.create');
 Route::get('/songs/create/{playlist}', [SongController::class, 'create'])->name('songs.create');
 Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
 
 
+
 // Bearbeitung Playlists
-//Route::resource('playlists', PlaylistController::class);
-Route::get('/playlists/{playlist}/edit', [PlaylistController::class, 'edit'])->name('playlists.edit');
+Route::get('/playlists/edit/{playlist}', [PlaylistController::class, 'edit'])->name('playlists.edit');
 Route::put('/playlists/{playlist}', [PlaylistController::class, 'update'])->name('playlists.update');
 Route::delete('/playlists/{playlist}', [PlaylistController::class, 'destroy'])->name('playlists.destroy');
 // Route zum Anzeigen des Formulars für das Erstellen eines Songs (create)
 //Route::get('/playlists/create', [PlaylistController::class, 'create'])->name('playlists.create');
 Route::post('/playlists', [PlaylistController::class, 'store'])->name('playlists.store');
 
-
-// Route für Import und Export
 Route::get('export-csv', [PlaylistController::class, 'exportCSV'])->name('exportCSV');
 Route::post('/playlists/import', action: [PlaylistController::class, 'importCSV'])->name('playlists.import');
 
-//Route::post('/playlists/import', [PlaylistController::class, 'importCSV'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class])->name('playlists.import');
+//Route::post('import-csv', [PlaylistController::class, 'importCSV'])->name('importCSV');
+
+
+Route::get('/favorit', function () {
+    return view('favorit');
+})->name('favorit');
+
+Route::get('/podcast', function () {
+    return view('podcast');
+})->name('podcast');
+
+Route::get('/songs', function () {
+    return view('songs');
+})->name('songs');
+
+
+
+
+
 
 
 

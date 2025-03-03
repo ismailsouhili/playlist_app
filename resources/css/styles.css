@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(42, 42, 58, 0.8);
+    /*background-color: rgba(42, 42, 58, 0.8);
     /* Mit Transparenz */
     color: white;
     margin: 20px;
@@ -23,16 +23,22 @@ body {
     font-size: 1.5rem;
 }
 
-.list-group-item {
+.list-item{
+    border: none !important;
+    color: white !important;
+
+}
+
+/*.list-group-item {
     background-color: #4A4A5A;
-    /* Mit Helligkeitsanpassung */
+    /* Mit Helligkeitsanpassung 
     border: none;
     color: white;
     transition: all 0.3s ease-in-out;
     font-size: 1.1rem;
-}
+}*/
 
-.list-group-item a {
+/*.list-group-item a {
     color: white;
     text-decoration: none;
     display: block;
@@ -40,17 +46,17 @@ body {
     border-radius: 8px;
 }
 
-.list-group-item:hover {
+/*.list-group-item:hover {
     background-color: hsl(540, 10%, 25%);
     /* Mit Helligkeitsanpassung */
-    color: #f39c12 !important;
-}
+    /*color: #f39c12 !important;
+}*/
 
-.list-group-item.active {
+/*.list-group-item.active {
     background-color: #f39c12;
     color: #f39c12 !important;
     font-weight: bold;
-}
+}*/
 
 .song-card {
     background-color: #2a2a3a;
@@ -75,7 +81,7 @@ body {
 
 .song-card .btn-action {
     margin-left: 10px;
-    padding: 8px 10px;
+    padding: 4px 5px;
     font-size: 1rem;
 
 }
@@ -106,8 +112,8 @@ body {
 }
 
 .btn-sm {
-    padding: 8px 10px;
-    font-size: 1.3rem;
+    padding: 4px 5px;
+    font-size: 1rem;
     border-radius: 5%;
 }
 
@@ -155,4 +161,86 @@ body {
     box-shadow: 0 0 10px rgba(176, 149, 197, 0.5);
 }
 
+
+
+
+
+.song-card {
+    background-color: #2a2a3a;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column; /* Alle Elemente in eine Spalte anordnen */
+    align-items: flex-start;
+}
+
+.song-card .song-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px; /* Abstand nach dem Titel */
+}
+
+.song-card .btn-action {
+    margin-left: 10px;
+    padding: 4px 5px;
+    font-size: 1rem;
+    margin-bottom: 10px; /* Abstand zum nächsten Element */
+}
+
+/* Buttons für die Steuerung (Play/Pause, Zurück, Vor) */
+.song-card .song-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px; /* Abstand nach den Steuerungs-Buttons */
+}
+
+/* Bearbeitungs-Buttons (Bearbeiten, Löschen, Teilen) */
+.song-card .edit-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px; /* Abstand oben */
+}
+
+/* Responsive für mobile Geräte */
+@media (max-width: 768px) {
+    /* Song-Titel und Steuerungs-Buttons untereinander */
+    .song-card .song-controls {
+        flex-direction: column; /* Vertikal anordnen auf kleinen Bildschirmen */
+        align-items: center;
+    }
+
+    /* Bearbeitungs-Buttons untereinander anordnen */
+    .song-card .edit-controls {
+        flex-direction: column; /* Bearbeitungs-Buttons untereinander */
+        align-items: center;
+        margin-top: 10px; /* Abstand nach den Steuerungs-Buttons */
+    }
+
+    /* Abstände und Schriftgrößen anpassen */
+    .song-card .song-title {
+        font-size: 1.1rem; /* Kleinere Schrift auf kleinen Geräten */
+    }
+
+    .song-card .btn-action {
+        margin-bottom: 5px; /* Abstand zwischen den Buttons */
+        font-size: 1.2rem; /* Größere Schrift für Buttons auf mobilen Geräten */
+    }
+}
+
+@media (max-width: 576px) {
+    /* Noch kleinere Schriftgröße für ganz kleine Bildschirme */
+    .song-card .song-title {
+        font-size: 1rem; /* Noch kleinere Schrift */
+    }
+
+    /* Abstände weiter reduzieren */
+    .song-card .btn-action {
+        margin-bottom: 6px; /* Weniger Abstand zwischen Buttons */
+        font-size: 1.1rem;
+    }
+}
 

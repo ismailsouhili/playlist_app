@@ -1,22 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
-    <div class="col-md-6">
-        <h3 class="mb-4 text-center heading-style">Playlist bearbeiten</h3>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <!-- Card für Playlist bearbeiten -->
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="m-0">Playlist bearbeiten</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Form zum Bearbeiten der Playlist -->
+                    <form action="{{ route('playlists.update', $playlist->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-        <form action="{{ route('playlists.update', $playlist?->id ?? 0) }}" method="POST" class="text-center">
-            @csrf
-            @method('PUT')
+                        <!-- Playlist Name Eingabefeld -->
+                        <div class="mb-4">
+                            <label for="name" class="form-label fw-bold text-dark">Playlist Name</label>
+                            <input type="text" name="name" id="name" value="{{ $playlist->name }}" class="form-control form-control-user">
+                        </div>
 
-            <div class="mb-4">
-                <label for="name" class="form-label">Playlist Name</label>
-                <input type="text" name="name" id="name" value="{{ $playlist->name }}" class="form-control input-light-purple">
+                        <!-- Speichern und Zurück Buttons -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">Speichern</button>
+                            <a href="{{ route('playlists.index') }}" class="btn btn-secondary btn-sm">Zurück</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <button type="submit" class="btn btn-primary mb-4 text-center heading-style">Speichern</button>
-            <a href="{{ route('playlists.index') }}" class="btn btn-secondary mb-4 text-center heading-style">Zurück</a>
-        </form>
+        </div>
     </div>
 </div>
 @endsection

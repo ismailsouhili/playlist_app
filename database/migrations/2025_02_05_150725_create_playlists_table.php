@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('song_count')->default(0);
-            $table->string('type');
+            $table->string('type')->default('standard');
             $table->timestamps();
         });
     }
