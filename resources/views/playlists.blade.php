@@ -679,6 +679,8 @@
 <script src="/js/demo/chart-pie-demo.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/chart-area-demo.js"></script>
+
 
 
 
