@@ -12,7 +12,7 @@
     <title>Playlist - App</title>
 
     <!-- Custom fonts for this template-->
-    <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
     <link
@@ -20,8 +20,8 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <!--<link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">-->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
@@ -675,6 +675,27 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+
+
+    <!-- jQuery -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript -->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages -->
+<script src="/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script>
+
 
 
 
