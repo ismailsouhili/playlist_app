@@ -19,15 +19,15 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    <!-- Custom styles for this template
     <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">-->
 
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
-    <!-- Bootstrap JS + Popper.js (Notwendig für Modals) -->
+    <!-- Bootstrap JS + Popper.js (Notwendig für Modals) 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
 
 </head>
 
@@ -677,24 +677,7 @@
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
 
 
-    <!-- jQuery -->
-<script src="/vendor/jquery/jquery.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript -->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages -->
-<script src="/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="/vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/js/demo/chart-area-demo.js"></script>
-<script src="/js/demo/chart-pie-demo.js"></script>
 
 
 
