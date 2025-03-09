@@ -796,7 +796,7 @@
             }
 
             // Song teilen
-            function shareSong(songTitle) {
+            /*function shareSong(songTitle) {
                 const shareText = `Höre dir diesen Song an: ${songTitle}`;
                 if (navigator.share) {
                     navigator.share({
@@ -807,7 +807,21 @@
                 } else {
                     alert("Teilen wird in diesem Browser nicht unterstützt.");
                 }
-            }
+            }*/
+
+                                    window.shareSong = function(songTitle) {
+    const shareText = `Höre dir diesen Song an: ${songTitle}`;
+    if (navigator.share) {
+        navigator.share({
+            title: "Song teilen",
+            text: shareText,
+            url: window.location.href
+        }).catch(console.error);
+    } else {
+        alert("Teilen wird in diesem Browser nicht unterstützt.");
+    }
+};
+
 
 
         });
